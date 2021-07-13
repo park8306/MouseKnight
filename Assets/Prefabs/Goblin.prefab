@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1794455600}
   - component: {fileID: 1794455599}
   - component: {fileID: 1794455598}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 99716486271971163}
   - component: {fileID: 1607860658}
   - component: {fileID: 1607860660}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Goblin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 1794983635963854565}
   - component: {fileID: 1794983635963854564}
   - component: {fileID: 1794983635963854563}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

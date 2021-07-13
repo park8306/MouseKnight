@@ -81,6 +81,8 @@ public class Player : MonoBehaviour
             attackCollider.radius, enemyLayer);
         foreach (var item in enemyColliders)
         {
+
+            // 왜 고블린 hp가 안달까...
             item.GetComponent<Goblin>().TakeHit(power);
         }
 
@@ -240,7 +242,7 @@ public class Player : MonoBehaviour
         State = StateType.JumpUp;
         agent.enabled = false;
         float jumpStartTime = Time.time;
-        float jumpDuration = jumpYac[jumpYac.length - 1].time;
+        float jumpDuration = jumpYac[jumpYac.length - 1].time; // 점프커브의 총 시간, length는 점의 갯수?
         jumpDuration *= jumpTimeMultiply;
         float jumpEndTime = jumpStartTime + jumpDuration;
         float sumEvaluateTime = 0;
