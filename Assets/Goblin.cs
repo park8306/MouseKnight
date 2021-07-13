@@ -93,16 +93,28 @@ public class Goblin : MonoBehaviour
     public int power = 10;
     private IEnumerator AttackFSM()
     {
-        animator.Play("Attack");
-        yield return new WaitForSeconds(attackApplyTime);
-        // 실제 어택
-        if (Vector3.Distance(player.transform.position, transform.position) < attackRange)
+        while(true)
         {
-            // 플레이어를 때리자.
-            player.TakeHit(power);
-             //TakeHit <- 공격 당할 때
+            animator.Play("Attack");
+            yield return new WaitForSeconds(attackApplyTime);
+            // 실제 어택
+            if (Vector3.Distance(player.transform.position, transform.position) 
+                < attackRange)
+            {
+                // 플레이어를 때리자.
+                player.TakeHit(power);
+                //TakeHit <- 공격 당할 때
+            }
+            yield return new WaitForSeconds(attackTime - attackApplyTime);
+            if (Vector3.Distance(player.transform.position, transform.position) 
+                > attackRange)
+            {
+                break;
+                //TakeHit <- 공격 당할 때
+            }
+            animator.Play("Idle");
+            yield return null;
         }
-        yield return new WaitForSeconds(attackTime - attackApplyTime);
         CurrentFsm = ChaseFSM;
     }
     public float hp = 100;

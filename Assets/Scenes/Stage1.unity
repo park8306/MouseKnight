@@ -1227,6 +1227,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6545111757962461767, guid: 04df33d3fbba8834c80e7aaec128b4a5, type: 3}
+      propertyPath: hp
+      value: 100000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6545111757962461767, guid: 04df33d3fbba8834c80e7aaec128b4a5, type: 3}
       propertyPath: mousePointer
       value: 
       objectReference: {fileID: 1316279914}
