@@ -11,8 +11,8 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        m_state = StateType.NotInit;
     }
-    [SerializeField] StateType state = StateType.Idle;
     public float speed = 20;
     public float walkDistance = 12;
     public float stopDistance = 7;
@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
         {
 
             // 왜 고블린 hp가 안달까...
-            item.GetComponent<Goblin>().TakeHit(power);
+            item.GetComponent<Monster>().TakeHit(power);
         }
 
         yield return new WaitForSeconds(attackTime);
@@ -160,7 +160,7 @@ public class Player : MonoBehaviour
     {
         // dashDirection x방향만 사용.
         spriteTrailRenderer.enabled = true; // 대쉬하는 동안 트레일을 활성
-        dashDirection = Input.mousePosition - mouseDownPosition;
+        dashDirection = mouseDownPosition - Input.mousePosition;
         dashDirection.y = 0;
         dashDirection.z = 0;
         dashDirection.Normalize();
@@ -211,6 +211,7 @@ public class Player : MonoBehaviour
     }
     public enum StateType
     {
+        NotInit,
         Idle,
         Walk,
         JumpUp,
@@ -220,16 +221,17 @@ public class Player : MonoBehaviour
         Death,
         Dash,
     }
+    [SerializeField] StateType m_state = StateType.Idle;
     StateType State
     {
-        get { return state; }
+        get { return m_state; }
         set
         {
-            if (state == value)
+            if (m_state == value)
                 return;
-            state = value;
+            m_state = value;
 
-            animator.Play(state.ToString());
+            animator.Play(m_state.ToString());
         }
     }
     Animator animator;
@@ -288,14 +290,13 @@ public class Player : MonoBehaviour
                 moveableDistance = walkDistance;
             }
             Vector3 dir = hitPoint - transform.position;
-            if (state == StateType.Dash)
+            if (m_state == StateType.Dash)
             {
                 dir = dashDirection;
             }
             dir.Normalize();
             if (distance > moveableDistance || State == StateType.Dash)
             {
-                
                 transform.Translate(dir * speed * Time.deltaTime, Space.World);
 
                 // 방향(dir)에 따라서
@@ -326,7 +327,7 @@ public class Player : MonoBehaviour
                 {
                     return false;
                 }
-                if (state == StateType.Dash)
+                if (m_state == StateType.Dash)
                 {
                     return false;
                 }

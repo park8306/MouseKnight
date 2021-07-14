@@ -120,8 +120,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 99716486271971163}
-  - component: {fileID: 1607860658}
   - component: {fileID: 1607860660}
+  - component: {fileID: 1974285352}
+  - component: {fileID: 7073970848050880085}
   m_Layer: 6
   m_Name: Goblin
   m_TagString: Untagged
@@ -145,27 +146,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1607860658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 175645609830108869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a32dff2341426a141b7357050647d59a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detectRange: 40
-  attackRange: 10
-  speed: 30
-  attackTime: 1
-  attackApplyTime: 0.5
-  power: 10
-  hp: 100
-  takeHitTime: 0.3
-  deathTime: 0.5
 --- !u!195 &1607860660
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -188,6 +168,41 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &1974285352
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175645609830108869}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 3
+  m_Height: 13.03
+  m_Direction: 1
+  m_Center: {x: 0, y: 5.54, z: 0}
+--- !u!114 &7073970848050880085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175645609830108869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11d450b3f87a43c40a1bbb546b29e495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectRange: 40
+  attackRange: 10
+  speed: 30
+  attackTime: 1
+  attackApplyTime: 0.55
+  power: 10
+  hp: 100
+  takeHitTime: 0.3
+  deathTime: 0.5
 --- !u!1 &1794983635963854562
 GameObject:
   m_ObjectHideFlags: 0
