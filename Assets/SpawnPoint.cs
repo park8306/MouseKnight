@@ -13,7 +13,7 @@ public class SpawnPoint : MonoBehaviour
 {
     
     public SpawnType spawnType;
-    void Start()
+    void Awake()
     {
         string spawnPrefabName;
         switch (spawnType)

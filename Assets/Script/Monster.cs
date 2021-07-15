@@ -27,7 +27,13 @@ public class Monster : MonoBehaviour
         CurrentFsm = IdleFSM;
         while (true) // 상태를 무한히 반복해서 실행하는 부분.
         {
+            var previousFSM = CurrentFsm;
             fsmHandle = StartCoroutine(CurrentFsm());
+            // FSM안에서 에러 발생시 
+            if (fsmHandle == null && previousFSM == CurrentFsm)
+            {
+                yield return null;
+            }
             while (fsmHandle != null)
             {
                 yield return null;
