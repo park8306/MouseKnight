@@ -1630,6 +1630,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StageResultUI
       objectReference: {fileID: 0}
+    - target: {fileID: 661299063045694362, guid: 0d233fc24d79981489ddeebe88ba84ec, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 661299063045694365, guid: 0d233fc24d79981489ddeebe88ba84ec, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
