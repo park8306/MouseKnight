@@ -8,6 +8,10 @@ public class SceneProperty : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        if (PersistCanvas.instance == null)
+        {
+            Instantiate(Resources.Load("PersistCanvas"));
+        }
     }
 
     private void OnDestroy()

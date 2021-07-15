@@ -992,6 +992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a7cc11848c07f4ab577b6ed63ebf53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameState: 0
 --- !u!4 &948946284
 Transform:
   m_ObjectHideFlags: 0
@@ -1661,6 +1662,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 222496730069677644, guid: 78f1d254de23c944fa6aa3d378700525, type: 3}
+      propertyPath: m_Text
+      value: Stage1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362745698302272112, guid: 78f1d254de23c944fa6aa3d378700525, type: 3}
+      propertyPath: m_Name
+      value: StageNameText
+      objectReference: {fileID: 0}
     - target: {fileID: 8426282041591721643, guid: 78f1d254de23c944fa6aa3d378700525, type: 3}
       propertyPath: m_Name
       value: StageCanvas
@@ -1796,3 +1805,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c3e9b893f9a5564ba53976362d00f7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageNameText: {fileID: 0}
