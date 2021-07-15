@@ -5,6 +5,7 @@ using UnityEngine;
 public class FixYPositionInEditMode : MonoBehaviour
 {
     // Start is called before the first frame update
+    public SpawnType spawnType;
     void Start()
     {
         if (Application.isPlaying)
@@ -17,5 +18,29 @@ public class FixYPositionInEditMode : MonoBehaviour
         var pos = transform.position;
         pos.y = 0;
         transform.position = pos;
+    }
+    private void OnDrawGizmos()
+    {
+        spawnType = GetComponent<SpawnPoint>().spawnType;
+        string iconName;
+        switch (spawnType)
+        {
+            case SpawnType.Player:
+                iconName = "Player";
+                break;
+            case SpawnType.Goblin:
+                iconName = "Goblin";
+                break;
+            case SpawnType.Skeleton:
+                iconName = "Skeleton";
+                break;
+            case SpawnType.Boss:
+                iconName = "Boss";
+                break;
+            default:
+                iconName = "";
+                break;
+        }
+        Gizmos.DrawIcon(transform.position, iconName + ".png", true);
     }
 }

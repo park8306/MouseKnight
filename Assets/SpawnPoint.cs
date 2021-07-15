@@ -1,17 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum SpawnType
+{
+    Player,
+    Goblin,
+    Skeleton,
+    Boss,
+}
 
 public class SpawnPoint : MonoBehaviour
 {
-    public enum SpawnType
-    {
-        Player,
-        Goblin,
-        Skeleton,
-        Boss,
-    }
+    
     public SpawnType spawnType;
     void Start()
     {
@@ -36,7 +36,7 @@ public class SpawnPoint : MonoBehaviour
         }
         Instantiate(Resources.Load(spawnPrefabName), transform.position,Quaternion.identity);
     }
-
-    // Update is called once per frame
     
+    // Update is called once per frame
+
 }
