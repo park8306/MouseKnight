@@ -2,6 +2,7 @@
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 // Start is called before the first frame update
 /// <summary>
@@ -16,10 +17,20 @@ public class StageManager : MonoBehaviour
 {
     public static StageManager instance;
     public GameStateType gameState = GameStateType.Ready;
+
+    public int sumMonsterCount;
+    public int enemiesKilledText;
+    public int damageTakenPoint;
+
     private void Awake()
     {
         instance = this;
         gameState = GameStateType.Ready;
+
+        List<SpawnPoint> allSpawnPoints = new List<SpawnPoint>( FindObjectsOfType<SpawnPoint>());
+
+        //Linq를 리스트형에서 SpawnType.Player가 아닌 SpawnPoint의 수를 넣음
+        sumMonsterCount = allSpawnPoints.Where(x => x.spawnType != SpawnType.Player).Count();
     }
     public Ease inEaseType = Ease.InElastic;
     public Ease outEaseType = Ease.OutBounce;
