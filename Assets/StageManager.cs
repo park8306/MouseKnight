@@ -13,7 +13,7 @@ using UnityEngine;
 /// 2. 스테이지 시작시 화면 밝아지게함
 /// 3. 몬스터 로드
 /// </summary>
-public class StageManager : BaseUI<StageManager>
+public class StageManager : SingletonMonoBehavior<StageManager>
 {
     public GameStateType gameState = GameStateType.Ready;
 
