@@ -26,7 +26,7 @@ public class StageManager : SingletonMonoBehavior<StageManager>
         base.Awake();
         gameState = GameStateType.Ready;
 
-        List<SpawnPoint> allSpawnPoints = new List<SpawnPoint>( FindObjectsOfType<SpawnPoint>());
+        List<SpawnPoint> allSpawnPoints = new List<SpawnPoint>( FindObjectsOfType<SpawnPoint>(true));
 
         //Linq를 리스트형에서 SpawnType.Player가 아닌 SpawnPoint의 수를 넣음
         sumMonsterCount = allSpawnPoints.Where(x => x.spawnType != SpawnType.Player).Count();
