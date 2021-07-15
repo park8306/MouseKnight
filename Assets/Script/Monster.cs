@@ -172,7 +172,7 @@ public class Monster : MonoBehaviour
         Debug.Log($"남은 몬스터 수 : {Items.Count}");
         if (Items.Count == 0)
         {
-            //StageResultUI.instance.Show();
+            StageResultUI.Instance.Show();
         }
         yield return new WaitForSeconds(deathTime);
 

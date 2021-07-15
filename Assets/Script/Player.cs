@@ -132,6 +132,7 @@ public class Player : MonoBehaviour
             return;
         }
         hp -= damage;
+        StageManager.Instance.damageTakenPoint += damage;
         // 피격 모션하자.
 
         StartCoroutine(TakeHitCo());

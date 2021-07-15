@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class StageResultUI : BaseUI<StageResultUI>
 {
     // Start is called before the first frame update
+    public override string HierarchyPath => "StageCanvas/StageResultUI";
     Text gradeText;
     Text enemiesKilledText;
     Text damageTakenText;
@@ -24,5 +25,12 @@ public class StageResultUI : BaseUI<StageResultUI>
     private void LoadNextStage()
     {
         Debug.LogWarning("LoadNextStage");
+    }
+
+    protected override void OnShow()
+    {
+        enemiesKilledText.text = $"{StageManager.Instance.enemiesKilledCount} / {StageManager.Instance.sumMonsterCount}";
+        damageTakenText.text = StageManager.Instance.damageTakenPoint.ToString();
+        gradeText.text = "A";
     }
 }
