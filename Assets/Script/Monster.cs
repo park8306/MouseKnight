@@ -19,7 +19,7 @@ public class Monster : MonoBehaviour
     SpriteRenderer spriteRenderer;
     IEnumerator Start()
     {
-        while (StageManager.instance.gameState != GameStateType.Playing)
+        while (StageManager.Instance.gameState != GameStateType.Playing)
         {
             yield return null;
         }

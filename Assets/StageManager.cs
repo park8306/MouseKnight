@@ -13,18 +13,17 @@ using UnityEngine;
 /// 2. 스테이지 시작시 화면 밝아지게함
 /// 3. 몬스터 로드
 /// </summary>
-public class StageManager : MonoBehaviour
+public class StageManager : BaseUI<StageManager>
 {
-    public static StageManager instance;
     public GameStateType gameState = GameStateType.Ready;
 
     public int sumMonsterCount;
-    public int enemiesKilledText;
+    public int enemiesKilledCount;
     public int damageTakenPoint;
 
-    private void Awake()
+    new private void Awake()
     {
-        instance = this;
+        base.Awake();
         gameState = GameStateType.Ready;
 
         List<SpawnPoint> allSpawnPoints = new List<SpawnPoint>( FindObjectsOfType<SpawnPoint>());

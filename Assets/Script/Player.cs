@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         //RaycastHit hit;
-        if(StageManager.instance.gameState != GameStateType.Playing)
+        if(StageManager.Instance.gameState != GameStateType.Playing)
         {
             return;
         }
