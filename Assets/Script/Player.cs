@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     public float walkDistance = 12; // 플레이어가 걷을 수 있는 플레이어와 마우스의 거리
     public float stopDistance = 7;  // 플레이어가 멈출 수 있는 플레이어와 마우스의 거리
     float normalSpeed;  // 일반적은 플레이어의 속도
-    public Transform mousePointer;  // 현재 마우스의 위치를 저장할 변수
+    //public Transform mousePointer;  // 현재 마우스의 위치를 저장할 변수
     public Transform spriteTr;  // 
     SpriteTrailRenderer.SpriteTrailRenderer spriteTrailRenderer;
     Plane plane = new Plane(new Vector3(0, 1, 0), 0);   // y쪽 방향으로 향하는 평면 생성 0은 원점으로부터의 거리
@@ -34,6 +34,10 @@ public class Player : MonoBehaviour
     void Update()
     {
         //RaycastHit hit;
+        if(StageManager.instance.gameState != GameStateType.Playing)
+        {
+            return;
+        }
         if (CanMoveState()) // 상태가 어택, TakeHit, Death면 실행시키지 못하고
         {   // 아니면 실행 시킬 수 있다.
             Move();
@@ -281,7 +285,7 @@ public class Player : MonoBehaviour
         if (plane.Raycast(ray, out float enter))    // 쏘는 빔이 평면과 평행을 이루면(접촉이 없다면) false , enter는 아마도 평면에서의 좌표값?
         {
             Vector3 hitPoint = ray.GetPoint(enter); // GetPoint로 enter값을 벡터값(마우스 포인터의 position)으로 변경
-            mousePointer.position = hitPoint;
+            //mousePointer.position = hitPoint;
             float distance = Vector3.Distance(hitPoint, transform.position);    // 마우스 포인터와 캐릭터의 거리
 
             float moveableDistance = stopDistance;  // 플레이어를 멈추게 하는 거리

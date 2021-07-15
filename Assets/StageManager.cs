@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 // Start is called before the first frame update
@@ -12,15 +13,35 @@ using UnityEngine;
 /// </summary>
 public class StageManager : MonoBehaviour
 {
-    
-    void Start()
+    public static StageManager instance;
+    public GameStateType gameState = GameStateType.Ready;
+    private void Awake()
     {
-        
+        instance = this;
+        gameState = GameStateType.Ready;
     }
+    IEnumerator Start()
+    {
+        //화면 어두운 상태로 만들고 2초동안 밝아지게 하자.
+        CanvasGroup blackScreen = PersistCanvas.instance.blackScreen;
+        blackScreen.gameObject.SetActive(true);
+        blackScreen.alpha = 1;
+        blackScreen.DOFade(0, 1.7f);
+        yield return new WaitForSeconds(1.7f);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // 스테이지 이름 표시하자.
+        string stageName = "Stage" + SceneProperty.instance.StageID;
+        // "Stage1"
+        // 2초 쉬었다가
+        StageCanvas.instance.stageNameText.text = stageName;
+        // 플레이어를 움직일 수 있게 하자.
+        gameState = GameStateType.Playing;
     }
+    
+}
+public enum GameStateType
+{
+    Ready,
+    Playing,
+    StageEnd,
 }
