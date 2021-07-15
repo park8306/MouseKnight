@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,9 @@ public class StageManager : MonoBehaviour
         instance = this;
         gameState = GameStateType.Ready;
     }
+    public Ease inEaseType = Ease.InElastic;
+    public Ease outEaseType = Ease.OutBounce;
+    [Button]
     IEnumerator Start()
     {
         //화면 어두운 상태로 만들고 2초동안 밝아지게 하자.
@@ -34,8 +38,12 @@ public class StageManager : MonoBehaviour
         string stageName = stageInfo.titleString;
         // "Stage1"
         // 2초 쉬었다가
+        StageCanvas.instance.stageNameText.transform.localPosition = new Vector3(-1000, 0, 0);
+        StageCanvas.instance.stageNameText.transform.DOLocalMoveX(0, 0.5f).SetEase(inEaseType);
         StageCanvas.instance.stageNameText.text = stageName;
         // 플레이어를 움직일 수 있게 하자.
+        yield return new WaitForSeconds(2f);
+        StageCanvas.instance.stageNameText.transform.DOLocalMoveX(-1000, 0.5f).SetEase(outEaseType);
         gameState = GameStateType.Playing;
     }
     

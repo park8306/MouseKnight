@@ -346,7 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82f2e5e5b807b4b4b9d5b22928079c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StageID: -1
+  StageID: 1
   sceneType: 0
 --- !u!4 &338938098
 Transform:
@@ -1038,6 +1038,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState: 0
+  inEaseType: 23
+  outEaseType: 30
 --- !u!4 &948946284
 Transform:
   m_ObjectHideFlags: 0
@@ -1190,6 +1192,56 @@ MonoBehaviour:
   maxX: 0
   minZ: 0
   maxZ: 0
+--- !u!1 &1001496139
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1001496141}
+  - component: {fileID: 1001496140}
+  m_Layer: 0
+  m_Name: GameData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1001496140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001496139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3bb67dc94eba642bf3cdcc1ed5d895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageInfos:
+  - stageID: 1
+    titleString: "\uC5EC\uD589\uC758 \uC2DC\uC791"
+    rewradXP: 100
+  - stageID: 2
+    titleString: "\uC2A4\uCF08\uB808\uD1A4 \uB4F1\uC7A5"
+    rewradXP: 200
+--- !u!4 &1001496141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001496139}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.5797215, y: 20.301256, z: -10.247608}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1092839438
 GameObject:
   m_ObjectHideFlags: 0
@@ -1709,7 +1761,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 222496730069677644, guid: 78f1d254de23c944fa6aa3d378700525, type: 3}
       propertyPath: m_Text
-      value: Stage1
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7362745698302272112, guid: 78f1d254de23c944fa6aa3d378700525, type: 3}
       propertyPath: m_Name
