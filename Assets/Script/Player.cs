@@ -7,25 +7,25 @@ using UnityEngine.AI;
 
 public class Player : MonoBehaviour
 {
-    public static Player instance;
+    public static Player instance; // 싱글턴을 위한 변수
     private void Awake()
     {
         instance = this;
-        m_state = StateType.NotInit;
+        m_state = StateType.NotInit; // ???
     }
-    public float speed = 20;
-    public float walkDistance = 12;
-    public float stopDistance = 7;
-    float normalSpeed;
-    public Transform mousePointer;
-    public Transform spriteTr;
+    public float speed = 20;    // 플레이어의 속도에 곱해줄 수
+    public float walkDistance = 12; // 플레이어가 걷을 수 있는 플레이어와 마우스의 거리
+    public float stopDistance = 7;  // 플레이어가 멈출 수 있는 플레이어와 마우스의 거리
+    float normalSpeed;  // 일반적은 플레이어의 속도
+    public Transform mousePointer;  // 현재 마우스의 위치를 저장할 변수
+    public Transform spriteTr;  // 
     SpriteTrailRenderer.SpriteTrailRenderer spriteTrailRenderer;
-    Plane plane = new Plane(new Vector3(0, 1, 0), 0);
+    Plane plane = new Plane(new Vector3(0, 1, 0), 0);   // y쪽 방향으로 향하는 평면 생성 0은 원점으로부터의 거리
     NavMeshAgent agent;
     private void Start()
     {
-        animator = GetComponentInChildren<Animator>();
-        spriteTr = GetComponentInChildren<SpriteRenderer>().transform;
+        animator = GetComponentInChildren<Animator>();  // 스프라이트의 animator를 할당
+        spriteTr = GetComponentInChildren<SpriteRenderer>().transform;  // ??
         normalSpeed = speed;
         spriteTrailRenderer = GetComponentInChildren<SpriteTrailRenderer.SpriteTrailRenderer>();
         spriteTrailRenderer.enabled = false;
@@ -34,8 +34,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         //RaycastHit hit;
-        if (CanMoveState())
-        {
+        if (CanMoveState()) // 상태가 어택, TakeHit, Death면 실행시키지 못하고
+        {   // 아니면 실행 시킬 수 있다.
             Move();
             Jump();
         }
@@ -160,12 +160,12 @@ public class Player : MonoBehaviour
     {
         // dashDirection x방향만 사용.
         spriteTrailRenderer.enabled = true; // 대쉬하는 동안 트레일을 활성
-        dashDirection = mouseDownPosition - Input.mousePosition;
+        dashDirection = Input.mousePosition - mouseDownPosition;
         dashDirection.y = 0;
         dashDirection.z = 0;
         dashDirection.Normalize();
-        speed = normalSpeed * dashSpeedMultiplySpeed;
         State = StateType.Dash;
+        speed = normalSpeed * dashSpeedMultiplySpeed;
 
         yield return new WaitForSeconds(dashTime);
         speed = normalSpeed;
@@ -197,6 +197,7 @@ public class Player : MonoBehaviour
     {
         if (jumpState == JumpStateType.Jump)
         {
+            // 점프상태이면 함수를 나감
             return;
         }
         if (Input.GetKeyDown(KeyCode.Mouse1))
@@ -237,14 +238,14 @@ public class Player : MonoBehaviour
     Animator animator;
     JumpStateType jumpState;
     [BoxGroup("점프")] public float jumpYMultiply = 1;
-    [BoxGroup("점프")] public float jumpTimeMultiply = 1;
+    [BoxGroup("점프")] public float jumpTimeMultiply = 1; // 점프 가능한 시간
     private IEnumerator JumpCo()
     {
-        jumpState = JumpStateType.Jump;
-        State = StateType.JumpUp;
-        agent.enabled = false;
-        float jumpStartTime = Time.time;
-        float jumpDuration = jumpYac[jumpYac.length - 1].time; // 점프커브의 총 시간, length는 점의 갯수?
+        jumpState = JumpStateType.Jump; // 점프 상태를 점프로 바꿈
+        State = StateType.JumpUp; // 상태를 점프로 바꿈
+        agent.enabled = false;  // agent가 바닥으로 잡고 있으니 잠시 해제를 해주자
+        float jumpStartTime = Time.time;    // 점프가 시작한 현재 시간
+        float jumpDuration = jumpYac[jumpYac.length - 1].time; // 0에서부터 인덱스간 애니메이션커브의 총 시간, length는 점의 갯수
         jumpDuration *= jumpTimeMultiply;
         float jumpEndTime = jumpStartTime + jumpDuration;
         float sumEvaluateTime = 0;
@@ -252,6 +253,7 @@ public class Player : MonoBehaviour
         while (Time.time < jumpEndTime)
         {
             float y = jumpYac.Evaluate(sumEvaluateTime / jumpTimeMultiply);
+            Debug.Log(Time.deltaTime);
             y *= jumpYMultiply * Time.deltaTime;
             transform.Translate(0, y, 0);
             yield return null;
@@ -276,39 +278,36 @@ public class Player : MonoBehaviour
     private void Move()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (plane.Raycast(ray, out float enter))
+        if (plane.Raycast(ray, out float enter))    // 쏘는 빔이 평면과 평행을 이루면(접촉이 없다면) false , enter는 아마도 평면에서의 좌표값?
         {
-            Vector3 hitPoint = ray.GetPoint(enter);
+            Vector3 hitPoint = ray.GetPoint(enter); // GetPoint로 enter값을 벡터값(마우스 포인터의 position)으로 변경
             mousePointer.position = hitPoint;
-            float distance = Vector3.Distance(hitPoint, transform.position);
+            float distance = Vector3.Distance(hitPoint, transform.position);    // 마우스 포인터와 캐릭터의 거리
 
-            float moveableDistance = stopDistance;
+            float moveableDistance = stopDistance;  // 플레이어를 멈추게 하는 거리
             //State가 Walk일땐 7(stopDIstance)사용.
             // Idle에서 Walk로 갈땐 12(WalkDistance)사용.
+
+            Vector3 dir = hitPoint - transform.position;    // 평소의 움직이는 방향
             if (State == StateType.Idle)
             {
-                moveableDistance = walkDistance;
+                moveableDistance = walkDistance; // 플레이어를 움직일 수 있게 하는 거리
             }
-            Vector3 dir = hitPoint - transform.position;
             if (m_state == StateType.Dash)
             {
-                dir = dashDirection;
+                dir = dashDirection;    // 대쉬 상태면 움직이는 방향을  dashDirection으로 바꿈
             }
             dir.Normalize();
+            // 만약 마우스 포인터와 캐릭터의 거리가 움직일 수 있는 거리보다 크거나 상태가 대쉬 상태면 실행
             if (distance > moveableDistance || State == StateType.Dash)
             {
                 transform.Translate(dir * speed * Time.deltaTime, Space.World);
-
-                // 방향(dir)에 따라서
-                // 오른쪽이라면 Y : 0, spriteX : 45
-                // 왼쪽이라면 Y : 180, spriteX : -45
-                
-                if (ChangeableState())
-                    State = StateType.Walk;
+                if (ChangeableState())  // 점프상태이거나 대쉬 상태가 아니면
+                    State = StateType.Walk; // 워크 상태로 변환
             }
-            else
+            else // 마우스 포인터와 캐릭터의 거리가 움직일 수 있는 거리보다 작고 상태가 대쉬가 아니면
             {
-                if (ChangeableState())
+                if (ChangeableState())// Idle상태로 변할 수 있는 지 확인하고
                     State = StateType.Idle;
             }
 

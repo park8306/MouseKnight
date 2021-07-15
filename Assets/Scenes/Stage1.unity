@@ -378,7 +378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 175645609830108869, guid: 655b14a9732531b4683691823133f23d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7073970848050880085, guid: 655b14a9732531b4683691823133f23d, type: 3}
       propertyPath: speed
@@ -1285,12 +1285,20 @@ PrefabInstance:
       value: 100000000
       objectReference: {fileID: 0}
     - target: {fileID: 6545111757962461767, guid: 04df33d3fbba8834c80e7aaec128b4a5, type: 3}
+      propertyPath: dashTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6545111757962461767, guid: 04df33d3fbba8834c80e7aaec128b4a5, type: 3}
+      propertyPath: dashCoolTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6545111757962461767, guid: 04df33d3fbba8834c80e7aaec128b4a5, type: 3}
       propertyPath: mousePointer
       value: 
       objectReference: {fileID: 1316279914}
     - target: {fileID: 6545111757962461767, guid: 04df33d3fbba8834c80e7aaec128b4a5, type: 3}
       propertyPath: dashableDistance
-      value: 1000
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6545111757962461768, guid: 04df33d3fbba8834c80e7aaec128b4a5, type: 3}
       propertyPath: m_Radius
